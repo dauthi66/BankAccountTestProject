@@ -9,7 +9,7 @@ namespace BankAccountTestProject
     /// <summary>
     /// represents a single customers bank account
     /// </summary>
-    internal class Account
+    public class Account
     {
         /// <summary>
         /// creates an account with a given owner and 0 balance
