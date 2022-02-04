@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,20 +36,27 @@ namespace BankAccountTestProject
         /// add specified amount to account
         /// </summary>
         /// <param name="amt">a positive amount to add to account</param>
-        public void Deposit(double amt)
+        /// <returns>The balance after deposit</returns>
+        public double Deposit(double amt)
         {
-            throw new NotImplementedException();
+            if (amt <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"The amount {amt} must be more than 0");
+            }
+            Balance += amt;
+            return Balance;
         }
 
         /// <summary>
         /// Removes an amount of money from the balance
+        /// and returns updated balance
         /// </summary>
         /// <param name="amt">positive amount of money to be taken from balance</param>
-        public void Withdraw(double amt)
+        /// <returns>Returns updated balance after withdraw</returns>
+        public double Withdraw(double amt)
         {
-            throw new NotImplementedException();
+            Balance -= amt;
+            return Balance;
         }
-
-
     }
 }
