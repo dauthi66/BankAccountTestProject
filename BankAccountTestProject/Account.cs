@@ -54,6 +54,15 @@ namespace BankAccountTestProject
         /// <returns>Returns updated balance after withdraw</returns>
         public double Withdraw(double amt)
         {
+            if (amt <= 0)
+            {
+                throw new ArgumentOutOfRangeException($"The amount {amt} must be more than 0");
+            }
+            if (amt > Balance)
+            {
+                throw new ArgumentOutOfRangeException($"Your balance of {Balance} does not have enough funds");
+
+            }
             Balance -= amt;
             return Balance;
         }
