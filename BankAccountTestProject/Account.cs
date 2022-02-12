@@ -11,6 +11,7 @@ namespace BankAccountTestProject
     /// </summary>
     public class Account
     {
+        private string name;
         /// <summary>
         /// creates an account with a given owner and 0 balance
         /// </summary>
@@ -23,7 +24,57 @@ namespace BankAccountTestProject
         /// <summary>
         /// account holders name first and last
         /// </summary>
-        public string Owner { get; set; }
+        public string Owner 
+        {
+            get { return name; }
+            set 
+            { 
+                if (value == null)
+                {
+                    throw new ArgumentNullException($"The name inputted: {Owner} cannot be null");
+                }
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException($"The name inputted: {Owner} cannot be blank");
+                }
+                if (IsOwnerNameValid(value))
+                {
+                    name = value;
+                }
+                else
+                {
+                    throw new ArgumentException($"The name inputted: {Owner} can only be up to 20 A-Z characters");
+                }
+
+                //check that owner is only characters
+                //if value contains any numbers or special characters - throws argumentException
+            } 
+        }
+
+        private bool IsOwnerNameValid(string ownerName)
+        {
+            char[] validCharacters = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
+                                'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+
+            ownerName = ownerName.ToLower();
+
+            const int MaxNameLength = 20;
+
+            if (ownerName.Length > MaxNameLength)
+            {
+                return false;
+            }
+
+            foreach (char letter in ownerName)
+            {
+                if ( letter != ' ' && !validCharacters.Contains(letter))
+                {
+                    return false;
+                }
+            }
+    
+            return true;
+        }
 
         /// <summary>
         /// amount of money in account
